@@ -11,4 +11,41 @@ class NewStudentModal extends Component{
             modal: !previous.modal
         }))
     }
+
+    render(){
+        const create = this.props.create;
+
+        var title = "Editing Student Info"
+        var button = <Button onClick={this.toggle}>Edit</Button>
+        if (create){
+            title = "Creating New Student";
+            button = (
+                <Button
+                    color='success'
+                    className="float-right"
+                    onClick={this.toggle}
+                    style={{minWidth: "200px"}}
+                >
+                Create New student
+                </Button>
+            )
+        }
+        return(
+            <Fragment>
+                {button}
+                <Modal isOpen={this.state.modal} toggle={this.toggle}>
+                    <ModalHeader toggle={this.toggle}>{title}</ModalHeader>
+                    <ModalBody>
+                        <NewStudentForm
+                            resetState={this.props.resetState}
+                            toggle={this.toggle}
+                            student={this.props.student}
+                        />
+                    </ModalBody>
+                </Modal>
+            </Fragment>
+        );
+    }
 }
+
+export default NewStudentModal;
